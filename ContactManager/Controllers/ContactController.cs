@@ -4,18 +4,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ContactManager.Services;
 
 namespace ContactManager.Controllers
 {
     public class ContactController : ApiController
     {
-        public string[] Get()
+        private ContactRepository contactRepository;
+
+        public ContactController()
         {
-            return new string[]
-            {
-        "Hello",
-        "World"
-            };
+            this.contactRepository = new ContactRepository();
+        }
+        public Contact[] Get()
+        {
+            return contactRepository.GetAllContacts();
         }
     }
 }
